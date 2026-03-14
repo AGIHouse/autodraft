@@ -1,6 +1,6 @@
 # AutoDraft
 
-**AutoDraft** is an autonomous research and drafting workflow for papers.
+**AutoDraft** is an autonomous research and drafting workflow for scientific papers and high-consequence technical writing.
 
 It applies the **autoresearch** paradigm to **research writing**, shifting the human role away from manually dragging every draft into shape and toward defining the governing objective, structure and evaluation logic for a system that can iterate on its own.
 
