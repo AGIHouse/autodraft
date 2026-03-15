@@ -1,7 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(chmod:*)"
+      "Bash(tree:*)",
+      "Bash(wc:*)"
     ]
+  },
+  "hooks": {},
+  "name": "AutoDraft",
+  "description": "Autonomous research drafting workflow for AGI House Hackathon",
+  "version": "0.1.0",
+  "context": {
+    "project_type": "research_automation",
+    "hackathon": "AGI House",
+    "goal": "Transform research theses into structured academic papers through autonomous iteration"
   }
 }
