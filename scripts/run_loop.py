@@ -27,6 +27,14 @@ class ModelProvider:
             import openai
             self.client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
             self.model = os.getenv("OPENAI_MODEL", "gpt-4-turbo-preview")
+        elif self.provider_name == "hyperbolic":
+            import openai
+            # Hyperbolic uses OpenAI-compatible API
+            self.client = openai.OpenAI(
+                api_key=os.getenv("HYPERBOLIC_API_KEY"),
+                base_url=os.getenv("HYPERBOLIC_BASE_URL", "https://api.hyperbolic.xyz/v1")
+            )
+            self.model = os.getenv("HYPERBOLIC_MODEL", "meta-llama/Meta-Llama-3.1-70B-Instruct")
         elif self.provider_name == "anthropic":
             import anthropic
             self.client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
@@ -37,7 +45,7 @@ class ModelProvider:
     def generate(self, prompt: str, system: str = None) -> str:
         """Generate text using the configured provider"""
 
-        if self.provider_name == "openai":
+        if self.provider_name in ["openai", "hyperbolic"]:
             messages = []
             if system:
                 messages.append({"role": "system", "content": system})
@@ -361,6 +369,9 @@ def main():
     # Validate environment
     if provider_name == "openai" and not os.getenv("OPENAI_API_KEY"):
         print("Error: OPENAI_API_KEY not set in .env file")
+        sys.exit(1)
+    elif provider_name == "hyperbolic" and not os.getenv("HYPERBOLIC_API_KEY"):
+        print("Error: HYPERBOLIC_API_KEY not set in .env file")
         sys.exit(1)
     elif provider_name == "anthropic" and not os.getenv("ANTHROPIC_API_KEY"):
         print("Error: ANTHROPIC_API_KEY not set in .env file")
